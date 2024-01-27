@@ -1,4 +1,5 @@
 <%@ page import="java.sql.*" %>
+<%@ page import="common.JDBConnect" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 	JDBConnect jdbc = new JDBConnect();
 	
 	String sql = "SELECT id, pass, name, regidate FROM member";
-	Statment stmt = jdbc.con.createStatement();
+	Statement stmt = jdbc.con.createStatement();
 	ResultSet rs = stmt.executeQuery(sql);
 	
 	while(rs.next()){
