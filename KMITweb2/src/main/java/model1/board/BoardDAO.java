@@ -67,5 +67,49 @@ public class BoardDAO extends JDBConnect {
 		}
 		return bbs;
 	}
+	
+	public BoardDTO selectView(String num) {
+		BoardDTO dto = new BoardDTO();
+		
+		String query = "SELECT B.*, M.name "
+				+ " FROM member M INNER JOIN board B "
+				+ " ON M.id=B.id "
+				+ " WHERE num=?";
+		
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setNum(rs.getString(1));
+				dto.setTitle(rs.getString(2));
+				dto.setContent(rs.getString("content"));
+				dto.setPostdate(rs.getDate("postdate"));
+				dto.setId(rs.getString("id"));
+				dto.setVisitcount(rs.getString(6));
+				dto.setName(rs.getString(7));				
+			}
+		}catch(Exception e) {
+			System.out.println("예외 발생");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	public void updateVisitCount(String num) {
+		String query = "UPDATE board SET "
+				+ " visitcount=visitcount+1 "
+				+ " WHERE num=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			psmt.executeQuery();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
