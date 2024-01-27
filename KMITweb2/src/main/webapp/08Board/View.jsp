@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%
 String num = request.getParameter("num");
-
 BoardDAO dao = new BoardDAO(application);
 dao.updateVisitCount(num);
 BoardDTO dto = dao.selectView(num);
@@ -40,7 +39,8 @@ dao.close();
 			<tr>
 				<td>내용</td>
 				<td colspan="3" height="100">
-				<%= dto.getContent().replace("\r\n","<br>") %></td>
+				<%= dto.getContent().replace("\r\n","<br>") %>
+				</td>
 			</tr>
 			<tr>
 				<button type="button" onclick="location.href='List.jsp';">목록보기</button>
