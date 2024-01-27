@@ -12,6 +12,8 @@
 	<%
 	JDBConnect jdbc1 = new JDBConnect();
 	jdbc1.close();
+	
+	System.out.println("서상혁");
 	%>	
 </body>
 </html>
